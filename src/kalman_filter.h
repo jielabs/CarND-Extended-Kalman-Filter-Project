@@ -35,6 +35,14 @@ class KalmanFilter {
   void Predict();
 
   /**
+   * Updates the state by using standard Kalman Filter equations with y,
+   * so this method can be used for both Update and UpdateEKF.
+   * @param y The residual between actual measurement at k+1 and the predicted
+   *          measurement
+   */
+  void UpdateWithY(const Eigen::VectorXd &y);
+
+  /**
    * Updates the state by using standard Kalman Filter equations
    * @param z The measurement at k+1
    */
@@ -45,6 +53,40 @@ class KalmanFilter {
    * @param z The measurement at k+1
    */
   void UpdateEKF(const Eigen::VectorXd &z);
+
+  /**
+   * Updates the transition matrix F_ by delta t
+   * @param dt The delta t (elapsed time since the last measurement)
+   */
+  void UpdateF(float dt) {
+    F_(0, 2) = dt;
+    F_(1, 3) = dt;
+  }
+
+  /**
+   * Updates the process covariance matrix Q_ by delta t and process noise.
+   * @param dt The delta t (elapsed time since the last measurement)
+   * @param noise_ax The acceleration variance on x direction
+   * @param noise_ay The acceleration variance on y direction
+   */
+  void UpdateQ(float dt, float noise_ax, float noise_ay);
+
+  /**
+   * Updates the Process covariance matrix R_ by R. LiDar and RaDar have
+   * different R.
+   * @param R The matrix R to update R_
+   */
+  void UpdateR(Eigen::MatrixXd R) {
+    R_ = R;
+  }
+
+  /**
+   * Updates the Measurement matrix H_ by H. LiDar and RaDar have different H.
+   * @param H The matrix H to update H_
+   */
+  void UpdateH(Eigen::MatrixXd H) {
+    H_ = H;
+  }
 
   // state vector
   Eigen::VectorXd x_;

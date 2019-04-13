@@ -108,7 +108,9 @@ int main() {
           ground_truth.push_back(gt_values);
           
           // Call ProcessMeasurement(meas_package) for Kalman filter
-          fusionEKF.ProcessMeasurement(meas_package);       
+          // if (sensor_type.compare("L") == 0) {
+          fusionEKF.ProcessMeasurement(meas_package);
+          //}
 
           // Push the current estimated x,y positon from the Kalman filter's 
           //   state vector
@@ -138,6 +140,9 @@ int main() {
           msgJson["rmse_vy"] = RMSE(3);
           auto msg = "42[\"estimate_marker\"," + msgJson.dump() + "]";
           // std::cout << msg << std::endl;
+          std::cout << "rmse_x = " << RMSE(0) << " rmse_y = " << RMSE(1)
+                    << " rmse_vx = " << RMSE(2) << " rmse_vy = " << RMSE(3)
+                    << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
 
         }  // end "telemetry" if

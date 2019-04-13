@@ -1,0 +1,12 @@
+Both:
+D1: rmse_x = 0.0973178 rmse_y = 0.0854597 rmse_vx = 0.451267 rmse_vy = 0.439935
+D2: rmse_x = 0.0725678, rmse_y = 0.0964738, rmse_vx = 0.421634, rmse_vy = 0.493199
+
+Lidar only:
+D1: rmse_x = 0.183795 rmse_y = 0.154202 rmse_vx = 0.605092 rmse_vy = 0.485836
+D2: rmse_x = 0.165597, rmse_y = 0.15795, rmse_vx = 0.605979, rmse_vy = 0.495015
+
+Radar only:
+D1: rmse_x = 0.231908, rmse_y = 0.336098, rmse_vx = 0.525865, rmse_vy = 0.698701
+D2: rmse_x = 0.24395, rmse_y = 0.337522, rmse_vx = 0.603455, rmse_vy = 0.817398
+
